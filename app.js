@@ -1,19 +1,18 @@
 // --- 1. CONFIGURAÇÃO DO SUPABASE ---
 const supabaseUrl = 'https://ssrrbjmrwujvpllcxnjx.supabase.co';
 const supabaseKey = 'sb_publishable_wikZhbQKoPXtFH7bmZIi4g_Oc_zMdQo';
-const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+// MUDANÇA CRÍTICA: Nome alterado para clienteSupabase para evitar conflito com a CDN
+const clienteSupabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
 // --- 2. NAVEGAÇÃO MOBILE CORRIGIDA ---
 function mudarAba(idAba, titulo, btnElement) {
-    // Esconde todas as telas e tira o destaque dos botões
     document.querySelectorAll('.screen').forEach(tela => tela.classList.remove('active'));
     document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
     
-    // Mostra a tela selecionada e altera o título
     document.getElementById(idAba).classList.add('active');
     document.getElementById('page-title').innerText = titulo;
     
-    // Pinta de azul apenas o botão clicado
     if(btnElement) btnElement.classList.add('active');
 }
 
@@ -24,26 +23,23 @@ async function salvarProduto(btnElement) {
     
     if(!nome) return alert('Digite o nome do produto');
 
-    // Inicia a animação de carregamento
     const textoOriginal = btnElement.innerText;
     btnElement.innerText = '⏳ Salvando...';
     btnElement.disabled = true;
 
-    const { error } = await supabase.from('produtos').insert([{ nome: nome }]);
+    // Usando a nova variável clienteSupabase
+    const { error } = await clienteSupabase.from('produtos').insert([{ nome: nome }]);
     
     if (error) {
         console.error("Erro Supabase:", error);
         alert('Erro ao salvar produto: ' + error.message);
-        // Volta ao normal em caso de erro
         btnElement.innerText = textoOriginal;
         btnElement.disabled = false;
     } else {
-        // Feedback de sucesso (Verde)
         btnElement.innerText = '✅ Salvo!';
         btnElement.classList.add('sucesso');
         nomeInput.value = ''; 
         
-        // Retorna o botão ao estado original após 2 segundos
         setTimeout(() => {
             btnElement.innerText = textoOriginal;
             btnElement.disabled = false;
@@ -62,7 +58,8 @@ async function salvarMercado(btnElement) {
     btnElement.innerText = '⏳ Salvando...';
     btnElement.disabled = true;
 
-    const { error } = await supabase.from('mercados').insert([{ nome: nome }]);
+    // Usando a nova variável clienteSupabase
+    const { error } = await clienteSupabase.from('mercados').insert([{ nome: nome }]);
     
     if (error) {
         console.error("Erro Supabase:", error);
@@ -81,3 +78,6 @@ async function salvarMercado(btnElement) {
         }, 2000);
     }
 }
+
+// Obs: As funções salvarPromocao(), adicionarItemCesta() e finalizarCompra()
+// serão adicionadas no próximo passo, assim que essa conexão inicial brilhar verde!
