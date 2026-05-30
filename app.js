@@ -5,9 +5,8 @@ const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
 // --- 2. NAVEGAÇÃO MOBILE CORRIGIDA ---
 function mudarAba(idAba, titulo, btnElement) {
-    // Esconde todas as telas
+    // Esconde todas as telas e tira o destaque dos botões
     document.querySelectorAll('.screen').forEach(tela => tela.classList.remove('active'));
-    // Remove a cor de todos os botões do menu
     document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
     
     // Mostra a tela selecionada e altera o título
