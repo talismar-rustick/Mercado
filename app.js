@@ -1,7 +1,7 @@
 // --- 1. CONFIGURAÇÃO DO SUPABASE ---
 // Você vai substituir essas strings pelas chaves do seu projeto no Supabase
-const supabaseUrl = 'SUA_URL_DO_SUPABASE_AQUI';
-const supabaseKey = 'SUA_CHAVE_ANON_DO_SUPABASE_AQUI';
+const supabaseUrl = 'https://ssrrbjmrwujvpllcxnjx.supabase.co';
+const supabaseKey = 'sb_publishable_wikZhbQKoPXtFH7bmZIi4g_Oc_zMdQo';
 const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
 // --- 2. NAVEGAÇÃO MOBILE ---
