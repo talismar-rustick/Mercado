@@ -1,0 +1,70 @@
+:root {
+    --primary: #2563eb;
+    --secondary: #dbeafe;
+    --bg: #f3f4f6;
+    --text: #1f2937;
+    --success: #16a34a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+
+body { background-color: var(--bg); color: var(--text); padding-bottom: 70px; }
+
+header { background-color: var(--primary); color: white; padding: 20px; text-align: center; }
+
+main { padding: 15px; }
+
+.screen { display: none; }
+.screen.active { display: block; }
+
+.card { background: white; padding: 15px; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px; /* Evita zoom automático no iOS */
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.btn-secundario { background-color: var(--secondary); color: var(--primary); }
+
+.alerta { color: var(--success); display: block; margin-bottom: 10px; font-weight: bold; font-size: 14px; }
+
+.mb-1 { margin-bottom: 15px; }
+
+/* Barra Inferior */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: white;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+}
+
+.nav-btn {
+    background: none; color: #6b7280; width: auto; padding: 10px; font-size: 12px;
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+}
+
+.nav-btn.active { color: var(--primary); font-weight: bold; }
+
+.lista-relatorio, #lista-cesta { list-style: none; }
+.lista-relatorio li, #lista-cesta li {
+    display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee;
+}

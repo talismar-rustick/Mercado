@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <!-- Foco total em mobile, impede o zoom indesejado ao clicar nos inputs -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Minhas Compras</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1 id="page-title">Cadastro</h1>
+    </header>
+
+    <main id="app-content">
+        <!-- Tela de Cadastro -->
+        <section id="cadastro" class="screen active">
+            <div class="card">
+                <input type="text" id="nome-produto" placeholder="Nome do produto">
+                <button onclick="salvarProduto()">+ Salvar Produto</button>
+            </div>
+            <div class="card">
+                <input type="text" id="nome-mercado" placeholder="Nome do mercado">
+                <button onclick="salvarMercado()">+ Salvar Mercado</button>
+            </div>
+        </section>
+
+        <!-- Tela de Promoção -->
+        <section id="promocao" class="screen">
+            <div class="card">
+                <select id="promo-mercado"><option value="">Selecione o Mercado...</option></select>
+                <select id="promo-produto"><option value="">Selecione o Produto...</option></select>
+                <!-- inputmode="decimal" abre o teclado numérico no celular -->
+                <input type="number" id="promo-valor" inputmode="decimal" placeholder="Valor na promoção (R$)">
+                <button onclick="salvarPromocao()">Salvar Promoção</button>
+            </div>
+        </section>
+
+        <!-- Tela de Gestão de Compras -->
+        <section id="compras" class="screen">
+            <select id="compra-mercado" class="mb-1"><option value="">Mercado da compra atual...</option></select>
+            
+            <div class="card">
+                <select id="compra-produto"><option value="">Adicionar produto...</option></select>
+                <small id="alerta-promo" class="alerta" style="display: none;">Em promo no mercado X por R$ 0,00</small>
+                
+                <input type="number" id="compra-valor" inputmode="decimal" placeholder="Valor pago (R$)">
+                <button class="btn-secundario" onclick="adicionarItemCesta()">Add à Cesta</button>
+            </div>
+
+            <ul id="lista-cesta"></ul>
+            
+            <div class="total-bar">
+                <h3>Total: R$ <span id="total-compra">0.00</span></h3>
+                <button onclick="finalizarCompra()">Finalizar Compra</button>
+            </div>
+        </section>
+
+        <!-- Tela de Relatório -->
+        <section id="relatorio" class="screen">
+            <div class="card">
+                <h2>Resumo do Mês</h2>
+                <ul class="lista-relatorio" id="lista-resumo">
+                    <!-- Preenchido via JS -->
+                    <li><span>Mercado Exemplo</span> <strong>R$ 0,00</strong></li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <!-- Barra Inferior -->
+    <nav class="bottom-nav">
+        <button onclick="mudarAba('cadastro', 'Cadastro')" class="nav-btn active">📝 Cad</button>
+        <button onclick="mudarAba('promocao', 'Promoções')" class="nav-btn">⭐ Promo</button>
+        <button onclick="mudarAba('compras', 'Comprar')" class="nav-btn">🛒 Carrinho</button>
+        <button onclick="mudarAba('relatorio', 'Resumo Mensal')" class="nav-btn">📊 Resumo</button>
+    </nav>
+
+    <!-- Supabase e Lógica -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="app.js"></script>
+</body>
+</html>
