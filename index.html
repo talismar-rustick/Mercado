@@ -2,9 +2,12 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <!-- Foco total em mobile, impede o zoom indesejado ao clicar nos inputs -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Minhas Compras</title>
+    
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2563eb">
+    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -29,6 +32,12 @@
                 <select id="promo-mercado"><option value="">Selecione o Mercado...</option></select>
                 <select id="promo-produto"><option value="">Selecione o Produto...</option></select>
                 <input type="number" id="promo-valor" inputmode="decimal" placeholder="Valor na promoção (R$)">
+                
+                <label for="foto-encarte" style="display: block; text-align: center; background: var(--secondary); color: var(--primary); padding: 10px; border-radius: 6px; margin-bottom: 12px; cursor: pointer; font-weight: bold;">
+                    📷 Ler Encarte com IA
+                </label>
+                <input type="file" id="foto-encarte" accept="image/*" style="display: none;">
+                
                 <button onclick="salvarPromocao(this)">Salvar Promoção</button>
             </div>
         </section>
@@ -56,8 +65,7 @@
             <div class="card">
                 <h2>Resumo do Mês</h2>
                 <ul class="lista-relatorio" id="lista-resumo">
-                    <li><span>Mercado Exemplo</span> <strong>R$ 0,00</strong></li>
-                </ul>
+                    </ul>
             </div>
         </section>
     </main>
