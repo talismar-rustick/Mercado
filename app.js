@@ -1,5 +1,4 @@
 // --- 1. CONFIGURAÇÃO DO SUPABASE ---
-// Você vai substituir essas strings pelas chaves do seu projeto no Supabase
 const supabaseUrl = 'https://ssrrbjmrwujvpllcxnjx.supabase.co';
 const supabaseKey = 'sb_publishable_wikZhbQKoPXtFH7bmZIi4g_Oc_zMdQo';
 const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
@@ -8,43 +7,58 @@ const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 function mudarAba(idAba, titulo) {
     // Esconde todas as telas
     document.querySelectorAll('.screen').forEach(tela => tela.classList.remove('active'));
-    // Desmarca todos os botões do menu
+    
+    // Remove a classe 'active' de todos os botões com segurança
     document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
     
-    // Mostra a tela selecionada
+    // Mostra a tela selecionada e altera o título
     document.getElementById(idAba).classList.add('active');
     document.getElementById('page-title').innerText = titulo;
     
-    // Marca o botão clicado como ativo
-    event.currentTarget.classList.add('active');
+    // Destaca o botão clicado
+    if (window.event) {
+        const btn = window.event.currentTarget || window.event.target.closest('.nav-btn');
+        if (btn) btn.classList.add('active');
+    }
 }
 
-// --- 3. LÓGICA DE BANCO DE DADOS (Exemplos) ---
+// --- 3. LÓGICA DE BANCO DE DADOS ---
 async function salvarProduto() {
-    const nome = document.getElementById('nome-produto').value;
-    if(!nome) return alert('Digite o nome do produto');
-
-    const { data, error } = await supabase.from('produtos').insert([{ nome: nome }]);
+    const nomeInput = document.getElementById('nome-produto');
+    const nome = nomeInput.value.trim();
     
-    if (error) alert('Erro ao salvar!');
-    else {
-        alert('Produto salvo!');
-        document.getElementById('nome-produto').value = '';
+    if(!nome) {
+        alert('Digite o nome do produto');
+        return;
+    }
+
+    const { error } = await supabase.from('produtos').insert([{ nome: nome }]);
+    
+    if (error) {
+        console.error("Erro Supabase:", error);
+        alert('Erro ao salvar produto: ' + error.message);
+    } else {
+        alert('Produto salvo com sucesso!');
+        nomeInput.value = ''; // Limpa o campo após salvar
     }
 }
 
 async function salvarMercado() {
-    const nome = document.getElementById('nome-mercado').value;
-    if(!nome) return alert('Digite o nome do mercado');
-
-    const { data, error } = await supabase.from('mercados').insert([{ nome: nome }]);
+    const nomeInput = document.getElementById('nome-mercado');
+    const nome = nomeInput.value.trim();
     
-    if (error) alert('Erro ao salvar!');
-    else {
-        alert('Mercado salvo!');
-        document.getElementById('nome-mercado').value = '';
+    if(!nome) {
+        alert('Digite o nome do mercado');
+        return;
+    }
+
+    const { error } = await supabase.from('mercados').insert([{ nome: nome }]);
+    
+    if (error) {
+        console.error("Erro Supabase:", error);
+        alert('Erro ao salvar mercado: ' + error.message);
+    } else {
+        alert('Mercado salvo com sucesso!');
+        nomeInput.value = ''; // Limpa o campo após salvar
     }
 }
-
-// O restante das funções de carregar selects, salvar compra e promoções 
-// entraremos no detalhe assim que a conexão principal estiver rodando!
