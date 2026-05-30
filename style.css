@@ -25,7 +25,7 @@ input, select {
     margin-bottom: 12px;
     border: 1px solid #ccc;
     border-radius: 6px;
-    font-size: 16px; /* Evita zoom automático no iOS */
+    font-size: 16px; 
 }
 
 button {
@@ -37,6 +37,17 @@ button {
     border-radius: 6px;
     font-size: 16px;
     font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+button:disabled {
+    background-color: #9ca3af;
+    cursor: not-allowed;
+    transform: scale(0.98);
+}
+
+button.sucesso {
+    background-color: var(--success);
 }
 
 .btn-secundario { background-color: var(--secondary); color: var(--primary); }
@@ -60,21 +71,6 @@ button {
 .nav-btn {
     background: none; color: #6b7280; width: auto; padding: 10px; font-size: 12px;
     display: flex; flex-direction: column; align-items: center; gap: 4px;
-}
-
-/* Animação e estado dos botões */
-button {
-    transition: all 0.3s ease;
-}
-
-button:disabled {
-    background-color: #9ca3af; /* Cor cinza quando estiver carregando */
-    cursor: not-allowed;
-    transform: scale(0.98);
-}
-
-button.sucesso {
-    background-color: var(--success); /* Fica verde quando salva */
 }
 
 .nav-btn.active { color: var(--primary); font-weight: bold; }
